@@ -1,7 +1,7 @@
 ﻿//faça um programa em que o vetor 2 tenha numeros ordenados e sem repetidos;
 
 int tamanho = 5, aux;
-int[] vetorOriginal = new int[tamanho], vetorOrdenado = new int[tamanho];
+int[] vetorOriginal = new int[tamanho], vetorOrdenado = new int[tamanho], vetorDecrescente = new int[tamanho];
 bool zero = false;
 
 Console.WriteLine("\nVetor sem ordenação:");
@@ -15,53 +15,54 @@ for (int i = 0; i < tamanho; i++)
         zero = true;
 }
 
-for (int referencia = 0; referencia < tamanho; referencia++)
+for (int i = 0; i < tamanho; i++)
 {
-    for (int comparacao = referencia + 1; comparacao < tamanho; comparacao++)
+    for (int j = i + 1; j < tamanho; j++)
     {
-        if (vetorOrdenado[referencia] > vetorOrdenado[comparacao])
+        if (vetorOrdenado[i] > vetorOrdenado[j])
         {
-            aux = vetorOrdenado[referencia];
-            vetorOrdenado[referencia] = vetorOrdenado[comparacao];
-            vetorOrdenado[comparacao] = aux;
+            aux = vetorOrdenado[i];
+            vetorOrdenado[i] = vetorOrdenado[j];
+            vetorOrdenado[j] = aux;
         }
-        else if (vetorOrdenado[referencia] == vetorOrdenado[comparacao])
-            vetorOrdenado[comparacao] = 0;       
+        else if (vetorOrdenado[i] == vetorOrdenado[j])
+            vetorOrdenado[j] = 0;
     }
 }
 
-Console.WriteLine("\n\nVetor com ordenação e com zero no lugar dos repetidos:\n");
-
-for (int referencia = 0; referencia < tamanho; referencia++)
-{
-    if (zero == true)
-    {
-        vetorOrdenado[referencia] = 0;
-        zero = false;
-        Console.Write($"{vetorOrdenado[referencia]}, ");
-    }
-    else
-    {
-        for (int comparacao = referencia + 1; comparacao < tamanho; comparacao++)
-        {
-            if (vetorOrdenado[referencia] == 0)
-            {
-                vetorOrdenado[referencia] = vetorOrdenado[comparacao];
-                vetorOrdenado[comparacao] = 0;
-            }
-        }
-        Console.Write($"{vetorOrdenado[referencia]}, ");
-    }    
-}
-
-Console.WriteLine("\n\nVetor com ordenação e sem repetições:");
+Console.WriteLine("\n\nVetor com ordenação e sem repetidos:\n");
 
 for (int i = 0; i < tamanho; i++)
 {
-    if (i == 0 && vetorOrdenado[0] == 0)
+    if (zero == true)
+    {
+        vetorOrdenado[i] = 0;
+        zero = false;
         Console.Write($"{vetorOrdenado[i]}, ");
-    if (vetorOrdenado[i] != 0)
-        Console.Write($"{vetorOrdenado[i]}, ");
+    }
+    else
+    {
+        for (int j = i + 1; j < tamanho; j++)
+        {
+            if (vetorOrdenado[i] == 0)
+            {
+                vetorOrdenado[i] = vetorOrdenado[j];
+                vetorOrdenado[j] = 0;
+            }
+        }
+        if (vetorOrdenado[i] != 0)
+            Console.Write($"{vetorOrdenado[i]}, ");
+    }
 }
 
+Console.WriteLine("\n\nVetor com ordenação decrescente:\n");
+
+for (int i = 0; i < tamanho; i++)
+{
+    if (vetorOrdenado[tamanho - i - 1] != 0)
+    {
+        vetorDecrescente[i] = vetorOrdenado[tamanho - i - 1];
+        Console.Write($"{vetorDecrescente[i]}, ");
+    }
+}
 Console.WriteLine("\n");
